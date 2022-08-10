@@ -20,6 +20,12 @@ provider "azurerm" {
   subscription_id = "b98a54bc-4cf1-41eb-a530-4ee3d7006dd2"
 }
 
+variable imagebuild {
+  type        = string
+  description = "Latest Image built"
+}
+
+
 resource "azurerm_resource_group" "tf_test" {
     name = "tfmainrg"
     location = "North Europe"
@@ -36,7 +42,7 @@ resource "azurerm_container_group" "tfcg_test" {
 
     container {
         name        = "weatherapi"
-        image       = "bnedeljkovic/weatherapi"
+        image       = "bnedeljkovic/weatherapi:${var.imagebuild}"
         cpu         = "1"
         memory      = "1"
 
